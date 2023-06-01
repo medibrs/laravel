@@ -9,7 +9,7 @@ class FormationController extends Controller
 {
     public function index()
     {
-        $formations = Formation::all();
+        $formations = Formation::paginate(10);
         
         return view('formation.index', compact('formations'));
     }

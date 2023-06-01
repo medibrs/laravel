@@ -16,6 +16,7 @@
                                 <label for="idclasse" class="col-md-4 col-form-label text-md-right">Classe</label>
 
                                 <div class="col-md-6">
+                                    
                                     <select id="idclasse" class="form-control @error('idclasse') is-invalid @enderror" name="idclasse" required>
                                         <option value="">Sélectionner une classe</option>
                                         @foreach ($classes as $classe)

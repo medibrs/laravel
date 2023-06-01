@@ -12,8 +12,9 @@ class EtudiantController extends Controller
 {
     public function index()
     {
-        $etudiants = Etudiant::all();
+        $etudiants = Etudiant::paginate(10);
         return view('etudiant.index', compact('etudiants'));
+    
     }
 
     public function show($codeE)
@@ -34,12 +35,19 @@ class EtudiantController extends Controller
 }
 
 
-    public function edit($codeE)
-    {
-        $etudiant = Etudiant::where('codeE', $codeE)->firstOrFail();
-        $classes = Classe::all();
-        return view('etudiant.edit', compact('etudiant', 'classes'));
-    }
+public function edit($codeE)
+{
+    $etudiant = Etudiant::where('codeE', $codeE)->firstOrFail();
+    $classes = Classe::select('idc', 'libelle')->distinct()->get();
+
+    // Supprimer les doublons en utilisant groupBy et first
+    $classes = $classes->groupBy('idc')->map->first();
+
+    return view('etudiant.edit', compact('etudiant', 'classes'));
+}
+
+
+
 
     public function update(Request $request, $codeE)
 {

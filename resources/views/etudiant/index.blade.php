@@ -2,16 +2,20 @@
 
 @section('content')
     <h1>Liste des étudiants</h1>
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Code</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Adresse</th>
-                <th>Date de naissance</th>
-                <th>Classe</th>
-                <th>Actions</th>
+                <th rowspan="2" class="text-center">Code</th>
+                <th rowspan="2" class="text-center">Nom</th>
+                <th rowspan="2" class="text-center">Prénom</th>
+                <th rowspan="2" class="text-center">Adresse</th>
+                <th rowspan="2" class="text-center">Date de naissance</th>
+                
+                <th colspan="2" class="text-center">Actions</th>
+            </tr>
+            <tr>
+                <th class="text-center">Détails</th>
+                <th class="text-center">Modifier</th>
             </tr>
         </thead>
         <tbody>
@@ -22,13 +26,16 @@
                     <td>{{ $etudiant->prenom }}</td>
                     <td>{{ $etudiant->adresse }}</td>
                     <td>{{ $etudiant->dateNaissance }}</td>
-                    <td>{{ $etudiant->classe->libelle }}</td>
+                    
                     <td>
                         <a href="{{ route('etudiant.show', ['codeE' => $etudiant->codeE]) }}" class="btn btn-primary">Détails</a>
-                        <a href="{{ route('etudiant.edit', ['codeE' => $etudiant->codeE]) }}" class="btn btn-warning">Modifier</a>
+                    </td>
+                    <td>
+                        <a href="{{ route('etudiant.edit', ['codeE' => $etudiant->codeE]) }}" class="btn btn-success">Modifier</a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
+        <div class='d-flex justify-content-center'>{{ $etudiants->links() }}</div> 
     </table>
 @endsection
